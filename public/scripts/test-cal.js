@@ -27,6 +27,21 @@ var CommentBox = React.createClass({
 			}.bind(this)
 		});
 	},
+	handleCommentSubmit: function(comment) {
+		console.log(comment);
+		// $.ajax({
+		// 	url: this.props.url,
+		// 	dataType: "json",
+		// 	type: "POST",
+		// 	data: comment,
+		// 	success: function(obj) {
+		// 		this.setState({data: obj});
+		// 	}.bind(this),
+		// 	error: function(xhr, status, err) {
+		// 		console.log(this.props.url, status, err.toString());
+		// 	}.bind(this)
+		// });
+	},
 	getInitialState: function() {
 		return {data: [ ]};
 	},
@@ -39,7 +54,7 @@ var CommentBox = React.createClass({
 			<div className="commentBox">
 				<h1>Comments</h1>
 				<CommentList data={this.state.data} />
-				<CommentForm />
+				<CommentForm onCommentSubmit={this.handleCommentSubmit} />
 			</div>
 		);
 	}
@@ -63,11 +78,31 @@ var CommentList = React.createClass({
 });
 
 var CommentForm = React.createClass({
+	handleSubmit: function(e) {
+		e.preventDefault();
+		var author = React.findDOMNode(this.refs.author).value.trim(),
+			text = React.findDOMNode(this.refs.text);
+		
+		if (!text || !author) {
+			return;
+		}
+		
+		this.props.onCommentSubmit({
+			author: author,
+			text: text
+		});
+		React.findDOMNode(this.refs.author).value = "";
+		React.findDOMNode(this.refs.text).value = "";
+		
+		return;
+	},
 	render: function() {
 		return (
-			<div className="commentForm">
-				I am a CommentForm.
-			</div>
+			<form className="commentForm" onSubmit={this.handleSubmit}>
+				<input type="text" placeholder="Your name" ref="author" />
+				<input type="text" placeholder="Message..." ref="text" />
+				<input type="submit" value="Post" />
+			</form>
 		);
 	}
 });
