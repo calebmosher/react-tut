@@ -28,19 +28,18 @@ var CommentBox = React.createClass({
 		});
 	},
 	handleCommentSubmit: function(comment) {
-		console.log(comment);
-		// $.ajax({
-		// 	url: this.props.url,
-		// 	dataType: "json",
-		// 	type: "POST",
-		// 	data: comment,
-		// 	success: function(obj) {
-		// 		this.setState({data: obj});
-		// 	}.bind(this),
-		// 	error: function(xhr, status, err) {
-		// 		console.log(this.props.url, status, err.toString());
-		// 	}.bind(this)
-		// });
+		$.ajax({
+			url: this.props.url,
+			dataType: "json",
+			type: "POST",
+			data: comment,
+			success: function(obj) {
+				this.setState({data: obj});
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.log(this.props.url, status, err.toString());
+			}.bind(this)
+		});
 	},
 	getInitialState: function() {
 		return {data: [ ]};
@@ -81,7 +80,7 @@ var CommentForm = React.createClass({
 	handleSubmit: function(e) {
 		e.preventDefault();
 		var author = React.findDOMNode(this.refs.author).value.trim(),
-			text = React.findDOMNode(this.refs.text);
+			text = React.findDOMNode(this.refs.text).value.trim();
 		
 		if (!text || !author) {
 			return;
