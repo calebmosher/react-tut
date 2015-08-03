@@ -6,5 +6,25 @@
     {
         "author": "Paul O’Shannessy",
         "text": "React is *great!*"
+    },
+    {
+        "author": "Johnny Bravo",
+        "text": "Hoo hah ho!"
+    },
+    {
+        "author": "Jeremy Irons",
+        "text": "I killed Mufasa."
+    },
+    {
+        "author": "Emperor Palpatine",
+        "text": "Something something Dark Side."
+    },
+    {
+        "author": "Ron Burgundy",
+        "text": "I am Ron Burgundy?"
+    },
+    {
+        "author": "TRON",
+        "text": "I fight for the users."
     }
 ]
